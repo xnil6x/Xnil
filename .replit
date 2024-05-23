@@ -1,0 +1,22 @@
+language="nodejs"
+run="pm2 start index.js && pm2 save && pm2 logs"
+entrypoint = "main.sh"
+
+[languages]
+
+[languages.bash]
+pattern = "**/{*.sh,*.bash}"
+
+[languages.bash.languageServer]
+start = "bash-language-server start"
+deploymentTarget = "cloudrun"
+
+[nix]
+channel = "stable-22_11"
+
+[deployment]
+run = ["bash", "main.sh"]
+
+[[ports]]
+localPort = 8080
+externalPort = 80
